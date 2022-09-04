@@ -1,0 +1,14 @@
+{
+  "Up_1": "key_up",
+  "Up_2": "key_w",
+  "Down_1": "key_down",
+  "Down_2": "key_s",
+  "Left_1": "key_left",
+  "Left_2": "key_a",
+  "Right_1": "key_right",
+  "Right_2": "key_d",
+  "Reload": "key_r",
+  "Escape": "key_esc",
+  "Fire": "mouse_left",
+  "Roll": "mouse_right"
+}

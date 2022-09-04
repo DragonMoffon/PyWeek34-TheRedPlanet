@@ -1,19 +1,21 @@
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from src.clock import _Clock
+
 from arcade.resources import add_resource_handle
+
 from src.engine import _Engine
+from src.input import process_key_data
+from src.constants import update_rate, draw_rate, screen_width, screen_height
 
 Engine: _Engine = None
-Clock: "_Clock" = None
 
 
 def launch():
     global Engine
-    global Clock
-
-    engine_rate = 1/120  # The update speed of the game. at 1/120 the engine will try run at 120 fps.
 
     add_resource_handle("data", "resources")
 
-    Engine = _Engine(800, 600, engine_rate, engine_rate)
-    Clock = Engine.clock
-
+    Engine = _Engine(screen_width, screen_height, update_rate, draw_rate)
+    process_key_data()
     Engine.run()

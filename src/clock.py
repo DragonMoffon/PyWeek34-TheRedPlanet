@@ -1,3 +1,6 @@
+from src.constants import clock_speed, update_rate
+
+
 class _Clock:
 
     def __init__(self, speed, frame_speed):
@@ -16,6 +19,12 @@ class _Clock:
         self._delta_time = delta_time
 
         self._current_time += self.delta_time
+
+    def length(self, time):
+        return self.time - time
+
+    def raw_length(self, raw_time):
+        return self.raw_time - raw_time
 
     @property
     def delta_time(self):
@@ -43,3 +52,6 @@ class _Clock:
 
     def set_game_speed(self, speed: float = 1.0):
         self._speed = speed
+
+
+Clock = _Clock(clock_speed, update_rate)
