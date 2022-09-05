@@ -1,0 +1,7 @@
+{
+  "move_data": {
+    "acceleration": 0.4,
+    "max speed": 360,
+    "sprint mod": 1.6
+  }
+}

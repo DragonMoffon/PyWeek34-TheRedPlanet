@@ -4,14 +4,22 @@ import arcade.key as keys
 from src.clock import Clock
 from src.input import Input
 
-from time import time
+from src.player.manager import PlayerManager
+from src.views.mission import MissionView
 
 
 class _Engine(Window):
 
     def __init__(self, width, height, draw_rate, update_rate):
         super().__init__(width, height, "Dragon's Bakery - PyWeek 34 - The Red Planet",
-                         update_rate=update_rate, draw_rate=draw_rate, fullscreen=True)
+                         update_rate=update_rate, draw_rate=draw_rate, fullscreen=True,
+                         vsync=True)
+        self._player = PlayerManager()
+        self._player.place_player(self.width//2, self.height//2)
+
+        self._mission_view = MissionView(self)
+
+        self.show_view(self._mission_view)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == keys.ESCAPE:
@@ -23,25 +31,19 @@ class _Engine(Window):
         Input.key_release(symbol, modifiers)
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        print("clicky")
         Input.key_press(button, modifiers)
         Input.update_mouse(x, y)
 
     def on_mouse_release(self, x: int, y: int, button: int, modifiers: int):
-        print("clacky")
         Input.key_release(button, modifiers)
         Input.update_mouse(x, y)
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
-        print("movey")
         Input.update_mouse(x, y, dx, dy)
 
     def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
-        print("draggy")
         Input.update_mouse(x, y, dx, dy)
 
-    def on_update(self, delta_time: float):
-        Clock.tick(delta_time)
-
-    def on_draw(self):
-        self.clear()
+    @property
+    def player(self):
+        return self._player

@@ -21,10 +21,10 @@ class _Clock:
         self._current_time += self.delta_time
 
     def length(self, time):
-        return self.time - time
+        return self.time - time if time >= 0 else 0
 
     def raw_length(self, raw_time):
-        return self.raw_time - raw_time
+        return self.raw_time - raw_time if raw_time >= 0 else 0
 
     @property
     def delta_time(self):

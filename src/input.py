@@ -18,7 +18,10 @@ class Key:
         self._release_frame = -1
 
     def __repr__(self):
-        return "key: " + self._name
+        return f"{self._name} : {self._pressed}"
+
+    def __sub__(self, other):
+        return self._pressed - other._pressed
 
     def held(self, length):
         return length >= Clock.length(self._press_time)
@@ -27,18 +30,30 @@ class Key:
         return self._pressed
 
     def press(self):
+        if not self._pressed:
+            self._press_time = Clock.time
+            self._press_frame = Clock.frame
+
+            self._release_frame = -1
+
         self._pressed = True
 
     def release(self):
+        if self._pressed:
+            self._release_frame = Clock.frame
+
+            self._press_frame = -1
+            self._press_time = -1
+
         self._pressed = False
 
     @property
     def pressed(self):
-        return self._press_frame == Clock.frame
+        return self._press_frame + 1 == Clock.frame
 
     @property
     def released(self):
-        return self._release_frame == Clock.frame
+        return self._release_frame + 1 == Clock.frame
 
     @property
     def length(self):
@@ -58,14 +73,37 @@ class NullKey(Key):
         pass
 
 
+def process_key_data():
+    global Input
+    _keys = {"mouse": {'left': 1, 'middle': 2, 'right': 4},
+             "key": {'up': keys.UP, 'down': keys.DOWN, 'left': keys.LEFT, 'right': keys.RIGHT, 'esc': keys.ESCAPE,
+                     'rshift': keys.LSHIFT, 'w': keys.W, 'a': keys.A, 's': keys.S, 'd': keys.D, 'r': keys.R}}
+
+    with open(resolve_resource_path(":data:/key_data.json")) as _file:
+        _key_json: dict = load(_file)
+        _key_dict: dict = {}
+        for key, item in _key_json.items():
+            key = key.split("_")[0]
+            item = item.split("_")
+            if key not in _key_dict:
+                _key = Key(key)
+                _key_dict[key] = _key
+            _key_dict[_keys[item[0]][item[1]]] = _key
+    return _key_dict
+
+
 class InputStream:
 
-    def __init__(self, key_data):
+    def __init__(self):
         self._null_key = NullKey('null')
-        self._key_data: Dict[Key] = key_data
+        self._key_data: Dict[Key] = None
         self._modifiers = 0
         self._mouse_pos = (0, 0)
         self._mouse_speed = (0, 0)
+
+    def setup_keys(self):
+        if not self._key_data:
+            self._key_data = process_key_data()
 
     def __getitem__(self, item):
         return self._key_data.get(item, self._null_key)
@@ -78,38 +116,14 @@ class InputStream:
         self[key].release()
         self._modifiers = modifiers
 
-    def mouse_press(self, button, modifiers):
-        self[button].press()
-        self._modifiers = modifiers
-
-    def mouse_release(self, button, modifiers):
-        self[button].press()
-        self._modifiers = modifiers
-
     def update_mouse(self, x, y, dx=None, dy=None):
         self._mouse_pos = (x, y)
         self._mouse_speed = (dx, dy) if dx and dy else self._mouse_speed
 
+    @property
+    def mouse(self):
+        return self._mouse_pos
 
-Input: InputStream = None
 
+Input: InputStream = InputStream()
 
-def process_key_data():
-    global Input
-    _keys = {"mouse": {'left': 1, 'middle': 2, 'right': 4},
-             "key": {'up': keys.UP, 'down': keys.DOWN, 'left': keys.LEFT, 'right': keys.RIGHT, 'esc': keys.ESCAPE,
-                     'w': keys.W, 'a': keys.A, 's': keys.S, 'd': keys.D, 'r': keys.R}}
-
-    with open(resolve_resource_path(":data:/key_data.json")) as _file:
-        _key_json: dict = load(_file)
-        _key_dict: dict = {}
-        for key, item in _key_json.items():
-            key = key.split("_")[0]
-            item = item.split("_")
-            if key not in _key_dict:
-                _key = Key(key)
-                _key_dict[key] = _key
-            _key_dict[_keys[item[0]][item[1]]] = _key
-
-    Input = InputStream(_key_dict)
-    print(Input)
