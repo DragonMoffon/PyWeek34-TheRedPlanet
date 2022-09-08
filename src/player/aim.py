@@ -16,9 +16,9 @@ class Aim:
 
     def update(self):
         _p_pos = self._target.position
-        _mouse_dir = normalise((Input.mouse[0] - _p_pos[0], Input.mouse[1] - _p_pos[1]))
+        _mouse_dir = normalise((Input.mouse[0] - _p_pos[0], Input.mouse[1] - (_p_pos[1]-32)))
 
-        self._arrow_sprite.position = (_p_pos[0] + _mouse_dir[0]*self._dist, _p_pos[1] + _mouse_dir[1]*self._dist)
+        self._arrow_sprite.position = (_p_pos[0] + _mouse_dir[0]*self._dist, _p_pos[1] + _mouse_dir[1]*self._dist - 32)
         # self._arrow_sprite.angle = vec_angle(_mouse_dir)
 
         self._direction = _mouse_dir

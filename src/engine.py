@@ -4,7 +4,7 @@ import arcade.key as keys
 from src.clock import Clock
 from src.input import Input
 
-from src.player.manager import PlayerManager
+from src.player import PLAYER
 from src.views.mission import MissionView
 
 
@@ -14,12 +14,15 @@ class _Engine(Window):
         super().__init__(width, height, "Dragon's Bakery - PyWeek 34 - The Red Planet",
                          update_rate=update_rate, draw_rate=draw_rate, fullscreen=True,
                          vsync=True)
-        self._player = PlayerManager()
-        self._player.place_player(self.width//2, self.height//2)
+        self.background_color = (185, 69, 29, 255)
+        PLAYER.initialise()
 
         self._mission_view = MissionView(self)
 
         self.show_view(self._mission_view)
+
+    def begin_mission(self):
+        self._mission_view.begin()
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == keys.ESCAPE:
@@ -43,7 +46,3 @@ class _Engine(Window):
 
     def on_mouse_drag(self, x: int, y: int, dx: int, dy: int, buttons: int, modifiers: int):
         Input.update_mouse(x, y, dx, dy)
-
-    @property
-    def player(self):
-        return self._player

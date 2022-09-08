@@ -1,4 +1,4 @@
-from math import sqrt, atan2, degrees
+from math import sqrt, atan2, degrees, floor
 
 clock_speed = 1
 update_rate = 1/60  # The update speed of the game. At 1/120 the engine will try run at 120 fps.
@@ -19,7 +19,7 @@ def clamp(vec, length):
 
 
 def lerp(vec_1, vec_2, a):
-    return tuple(_1 + a * (_2 - _1) for _1, _2 in zip(vec_1, vec_2))
+    return tuple(int(_1 + a * (_2 - _1)) for _1, _2 in zip(vec_1, vec_2))
 
 
 def vec_radians(vec):

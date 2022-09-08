@@ -63,6 +63,12 @@ class Key:
     def name(self):
         return self._name
 
+    def __mul__(self, other):
+        return other * self._pressed
+
+    def __add__(self, other):
+        return other + self._pressed
+
 
 class NullKey(Key):
 
@@ -101,6 +107,11 @@ class InputStream:
         self._mouse_pos = (0, 0)
         self._mouse_speed = (0, 0)
 
+        self._camera_pos = (0, 0)
+
+    def update_camera_pos(self, camera_pos):
+        self._camera_pos = camera_pos
+
     def setup_keys(self):
         if not self._key_data:
             self._key_data = process_key_data()
@@ -121,8 +132,12 @@ class InputStream:
         self._mouse_speed = (dx, dy) if dx and dy else self._mouse_speed
 
     @property
-    def mouse(self):
+    def mouse_raw(self):
         return self._mouse_pos
+
+    @property
+    def mouse(self):
+        return self._camera_pos[0] + self._mouse_pos[0], self._camera_pos[1] + self._mouse_pos[1]
 
 
 Input: InputStream = InputStream()

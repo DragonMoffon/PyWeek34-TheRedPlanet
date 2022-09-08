@@ -1,4 +1,4 @@
-from arcade import Texture, load_texture, Sprite
+from arcade import Texture, load_texture, Sprite, SpriteList
 
 from src.clock import Clock
 
@@ -6,7 +6,7 @@ from src.clock import Clock
 class Bullet:
 
     def __init__(self, _pos, _vel, _data, _parent=None):
-        self._sprite = Sprite(_data['texture'])
+        self._sprite = Sprite(texture=_data['texture'])
         self._class = _data['class']
 
         self._pos = _pos
@@ -29,7 +29,9 @@ class Bullet:
             self._destroy()
 
     def _destroy(self):
-        pass
+        self.sprite.remove_from_sprite_lists()
+        if self._parent is not None:
+            self._parent.remove(self)
 
     def update(self):
         pass
@@ -37,15 +39,11 @@ class Bullet:
 
 class SimpleBullet(Bullet):
 
-    def __init__(self, x, y, dx, dy):
+    def __init__(self, x, y, dx, dy, parent):
         super().__init__((x, y), (dx, dy),
                          {'texture': load_texture(':data:/textures/bullet_placeholder.png'),
                           'class': 'simple',
                           'life_time': 12.0})
-
-    def _destroy(self):
-        self.sprite.remove_from_sprite_lists()
-        self._parent.remove(self)
 
     def update(self):
         _pos = self._sprite.position

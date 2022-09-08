@@ -1,0 +1,260 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "l-trb.tmj",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Basic Room.tmj": {
+            "scale": 0.660546875,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1295.8959195742166,
+                "y": 865.9491425192193
+            }
+        },
+        "b-r.tmj": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.9625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 376.0509554140127,
+                "y": 359.2356687898089
+            }
+        },
+        "b-t.tmj": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.9625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 367.38853503184714,
+                "y": 303.18471337579615
+            }
+        },
+        "b-tr.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.5
+            }
+        },
+        "building.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "l-b.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.75
+            }
+        },
+        "l-r.tmj": {
+            "expandedObjectLayers": [
+                13
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.75
+            }
+        },
+        "l-rb.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.6666666666667
+            }
+        },
+        "l-t..tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "scale": 1.9625,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 304.20382165605093,
+                "y": 304.203821656051
+            }
+        },
+        "l-t.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.75
+            }
+        },
+        "l-tb.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.6666666666667
+            }
+        },
+        "l-tr.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.6666666666667
+            }
+        },
+        "l-trb.tmj": {
+            "expandedGroupLayers": [
+                6
+            ],
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 302.6666666666667,
+                "y": 302.66666666666663
+            }
+        },
+        "placeholder.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "t-b.tmj": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.9625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 303.69426751592357,
+                "y": 303.9490445859873
+            }
+        },
+        "t-r.tmj": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 304,
+                "y": 303.75
+            }
+        },
+        "t-rb.tmj": {
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 1.9625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 303.69426751592357,
+                "y": 303.9490445859873
+            }
+        },
+        "tile_placeholder.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "walls.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Playtech/Desktop/Code/Python/PyWeek34-TheRedPlanet/resources/rooms",
+    "last.imagePath": "C:/Users/Playtech/Desktop/Code/Python/PyWeek34-TheRedPlanet/resources/textures/walls",
+    "map.height": 19,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "json",
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
+    "map.width": 19,
+    "openFiles": [
+        "t-r.tmj",
+        "t-rb.tmj",
+        "t-b.tmj",
+        "l-t.tmj",
+        "l-r.tmj",
+        "l-b.tmj",
+        "l-tr.tmj",
+        "l-rb.tmj",
+        "l-tb.tmj",
+        "l-trb.tmj",
+        "b-t.tmj",
+        "b-r.tmj",
+        "b-tr.tmj",
+        "building.tsx"
+    ],
+    "project": "Rooms.tiled-project",
+    "recentFiles": [
+        "t-r.tmj",
+        "t-rb.tmj",
+        "t-b.tmj",
+        "l-t.tmj",
+        "l-r.tmj",
+        "l-b.tmj",
+        "l-tr.tmj",
+        "l-rb.tmj",
+        "l-tb.tmj",
+        "building.tsx",
+        "b-tr.tmj",
+        "b-r.tmj"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 4,
+    "tileset.spacing": 4,
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    },
+    "tileset.type": 1
+}
