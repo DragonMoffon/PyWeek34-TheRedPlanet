@@ -36,3 +36,6 @@ class Map:
 
     def draw(self):
         self._current_room.draw()
+
+    def top_draw(self):
+        self._current_room.top_draw()

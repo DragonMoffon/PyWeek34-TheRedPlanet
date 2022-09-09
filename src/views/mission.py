@@ -29,11 +29,15 @@ class MissionView(View):
 
         self._doors = ()
 
+    @property
+    def map(self):
+        return self._map
+
     def begin(self):
         self._map.first_room(*self._enemy_manager.next_room_diff)
         self._doors = ()
 
-        # self._enemy_manager.enter_room(self._map.room)
+        self._enemy_manager.enter_room(self._map.room)
         PLAYER.place(*self._map.room.door_pos('l'))
 
     def enter_door(self, door):
@@ -42,6 +46,7 @@ class MissionView(View):
         self._doors = ()
 
         PLAYER.place(*self._map.room.door_pos(direction))
+        PLAYER.clear_bullets()
         self._camera.move_to((-self._map.room.width // 2, -self._map.room.height // 2), 1.0)
 
     def on_update(self, delta_time):
@@ -64,6 +69,8 @@ class MissionView(View):
 
         self._enemy_manager.update()
 
+        self._enemy_manager.collisions()
+
         if self._enemy_manager.cleared_room and not self._doors:
             self._doors = ()
             self._doors = self._map.generate_doors()
@@ -81,8 +88,11 @@ class MissionView(View):
         self._enemy_manager.draw()
         PLAYER.draw()
 
+        self._map.top_draw()
+
         for door in self._doors:
             door.draw()
+
 
 
 

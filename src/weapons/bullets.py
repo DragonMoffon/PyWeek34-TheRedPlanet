@@ -33,6 +33,9 @@ class Bullet:
         if self._parent is not None:
             self._parent.remove(self)
 
+    def kill(self):
+        self._destroy()
+
     def update(self):
         pass
 
@@ -43,7 +46,7 @@ class SimpleBullet(Bullet):
         super().__init__((x, y), (dx, dy),
                          {'texture': load_texture(':data:/textures/bullet_placeholder.png'),
                           'class': 'simple',
-                          'life_time': 12.0})
+                          'life_time': 12.0}, parent)
 
     def update(self):
         _pos = self._sprite.position

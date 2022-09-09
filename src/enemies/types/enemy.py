@@ -13,6 +13,14 @@ class Enemy:
     def sprite(self):
         return self._data.sprite
 
+    @property
+    def health(self):
+        return self._data.health
+
+    def damage(self, damage=1):
+        self._data.health -= 1
+        print(self._data.health)
+
     def place(self, x, y):
         _x = 1000 + x*32
         _y = 500 + y*32

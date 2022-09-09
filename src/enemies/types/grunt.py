@@ -59,7 +59,7 @@ class GruntAi(Ai):
 class Grunt(Enemy):
 
     def __init__(self):
-        data = GruntData({'health': 15, 'speed': 300, 'weapon': None})
+        data = GruntData({'health': 4, 'speed': 300, 'weapon': None})
         super().__init__(GruntAi(data), data)
         self._data.sprite.texture = load_texture(":data:/textures/enemies.png", width=32, height=32)
         self._data.sprite.position = (200, 200)

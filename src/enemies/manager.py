@@ -1,7 +1,13 @@
+from typing import List
+
 from arcade import SpriteList
 
 from src.map.room import Room
 from src.enemies.wave import Wave
+
+from src.enemies.types.enemy import Enemy
+
+from src.player import PLAYER
 
 
 class EnemyManager:
@@ -10,7 +16,7 @@ class EnemyManager:
         self._current_round = []
         self._current_wave = None
 
-        self._current_enemies = []
+        self._current_enemies: List[Enemy] = []
         self._enemy_sprites = SpriteList()
 
         self._map = _map
@@ -40,6 +46,15 @@ class EnemyManager:
 
         for enemy in self._current_enemies:
             enemy.update()
+            if enemy.health <= 0:
+                self._current_enemies.remove(enemy)
+                enemy.sprite.remove_from_sprite_lists()
+
+    def collisions(self):
+        for index, enemy in enumerate(self._current_enemies[:]):
+            hit = PLAYER.bullets_hit(self._enemy_sprites[index])
+            if hit:
+                enemy.damage()
 
     def draw(self):
         self._enemy_sprites.draw(pixelated=True)

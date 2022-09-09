@@ -15,13 +15,12 @@ class _Engine(Window):
                          update_rate=update_rate, draw_rate=draw_rate, fullscreen=True,
                          vsync=True)
         self.background_color = (185, 69, 29, 255)
-        PLAYER.initialise()
-
         self._mission_view = MissionView(self)
 
         self.show_view(self._mission_view)
 
     def begin_mission(self):
+        PLAYER.initialise(self._mission_view.map)
         self._mission_view.begin()
 
     def on_key_press(self, symbol: int, modifiers: int):

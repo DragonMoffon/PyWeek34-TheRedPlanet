@@ -2,6 +2,7 @@ from typing import Dict
 
 from random import choice
 
+from arcade import Sprite
 from arcade.resources import resolve_resource_path
 
 from pytiled_parser import parse_map, TiledMap
@@ -26,6 +27,7 @@ class Room:
     def __init__(self, tiled_map: TileMap, wave_round: list, doors: dict = None):
         self._map = tiled_map
 
+        self._tops = self._map.sprite_lists['Tops']
         self._walls = self._map.sprite_lists['Walls']
         self._floor = self._map.sprite_lists['Floor']
 
@@ -57,10 +59,16 @@ class Room:
         self._floor.draw(pixelated=True)
         self._walls.draw(pixelated=True)
 
+    def top_draw(self):
+        self._tops.draw(pixelated=True)
+
     def door_pos(self, door_id):
         door_pos = self._doors[door_id]
         return ((door_pos[0]+0.5)*self._map.tile_width*self._map.scaling,
                 (self._map.height-(door_pos[1]-0.5))*self._map.tile_height*self._map.scaling)
+
+    def hit_walls(self, other: Sprite):
+        return other.collides_with_list(self._walls)
 
 
 class RoomShell:

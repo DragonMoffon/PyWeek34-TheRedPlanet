@@ -38,3 +38,7 @@ class Data:
     @property
     def health(self):
         return self._health
+
+    @health.setter
+    def health(self, value):
+        self._health -= 1

@@ -28,7 +28,7 @@ class PlayerManager:
 
         self._player_movement: PlayerMovement = None
 
-    def initialise(self):
+    def initialise(self, _map):
         with open(resolve_resource_path(":data:/player_data.json")) as data_file:
             self._data = load(data_file)
 
@@ -37,25 +37,37 @@ class PlayerManager:
                        ('idleshoot', 4, 96), ('runshoot', 4, 128), ('die', 7, 160))
         self._animator = Animator(load_animation_set(":data:/textures/player.png", _animations, (32, 32)),
                                   self._body_sprite)
+        self._body_sprite.hit_box = ((-8, -16), (-4, -8), (4, -8), (8, -16))
 
         self._aim = Aim(self._body_sprite)
         self._gun_manager = GunManager(self._body_sprite, self._aim)
 
-        _sprites = (self._body_sprite,)
+        self._sprite_list.extend((self._body_sprite, self._aim.sprite))
 
-        self._sprite_list.extend(_sprites + (self._aim.sprite,))
-
-        self._player_movement = PlayerMovement(_sprites, self._data['move_data'], self._animator)
+        self._player_movement = PlayerMovement(self._body_sprite, self._data['move_data'], self._animator, _map)
 
     @property
     def position(self):
         return self._body_sprite.position
 
+    @property
+    def bullets(self):
+        return self._gun_manager.bullets
+
     def hit_player(self, other):
         return self._body_sprite.collides_with_sprite(other)
 
+    def list_hit_player(self, other):
+        return self._body_sprite.collides_with_list(other)
+
+    def bullets_hit(self, other):
+        return self._gun_manager.bullets_hit(other)
+
     def place(self, x, y):
         self._body_sprite.position = (x, y)
+
+    def clear_bullets(self):
+        self._gun_manager.clear_bullets()
 
     def mission_update(self):
         vertical = Input['Up'] - Input['Down']
@@ -81,3 +93,4 @@ class PlayerManager:
     def draw(self):
         self._sprite_list.draw(pixelated=True)
         self._gun_manager.draw()
+        self._body_sprite.draw_hit_box(line_thickness=4)
